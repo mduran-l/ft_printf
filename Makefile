@@ -6,7 +6,7 @@
 #    By: mduran-l <mduran-l@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 12:36:32 by mduran-l          #+#    #+#              #
-#    Updated: 2024/01/09 12:26:24 by mduran-l         ###   ########.fr        #
+#    Updated: 2024/01/09 14:55:11 by mduran-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ $(NAME): $(OBJS) $(HDR) libft
 #	@$(AR) rcs $(NAME) $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
+	cd libft && $(MAKE) fclean
 	@$(RM) -f $(NAME)
 
 clean:
