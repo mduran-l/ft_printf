@@ -6,7 +6,7 @@
 #    By: mduran-l <mduran-l@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 12:36:32 by mduran-l          #+#    #+#              #
-#    Updated: 2024/01/09 14:55:11 by mduran-l         ###   ########.fr        #
+#    Updated: 2024/01/10 10:06:57 by mduran-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS = ft_printf.c
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
-.PHONY: all clean fclean re bonus libft
+.PHONY: all clean fclean re bonus
 all: $(NAME) bonus
 
 # Avoid relink
@@ -28,21 +28,17 @@ all: $(NAME) bonus
 %.o:%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJS) $(HDR) libft
+$(NAME): $(OBJS) $(HDR)
 	@$(AR) rcs $(NAME) $(OBJS)
 
 # bonus: $(OBJS) $(OBJS_BONUS) $(HDR)
 #	@$(AR) rcs $(NAME) $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
-	cd libft && $(MAKE) fclean
 	@$(RM) -f $(NAME)
 
 clean:
-	cd libft && $(MAKE) clean
 	@$(RM) -f $(OBJS) $(OBJS_BONUS)
 
-libft:
-	cd libft && $(MAKE) all clean
 
 re: fclean all

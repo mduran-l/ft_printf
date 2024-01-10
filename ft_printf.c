@@ -6,10 +6,32 @@
 /*   By: mduran-l <mduran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 09:54:35 by mduran-l          #+#    #+#             */
-/*   Updated: 2024/01/09 14:55:44 by mduran-l         ###   ########.fr       */
+/*   Updated: 2024/01/10 09:59:24 by mduran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
+
+static void	parse_string(const char *str, va_list *ap)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < ft_strlen(str))
+	{
+		if (str[i] == '%')
+		{
+			if (str[i + 1] == '%')
+				ft_putchar_fd('%', 1);
+			if (str[i + 1] == 'c')
+				ft_putchar_fd(va_arg(*ap, int), 1);
+			if (str[i + 1] == 's')
+				ft_putstr_fd(va_arg(*ap, char *), 1);
+			if (str[i + 1] == 'i')
+				ft_putnbr_fd(va_arg(*ap, int), 1);
+		}
+		i ++;
+	}
+}
 
 /*
 The printf utility formats and prints its arguments, after the first, under
@@ -50,21 +72,10 @@ Tienes que implementar las siguientes conversiones:
 */
 int	ft_printf(const char *str, ...)
 {
-	size_t	i;
 	va_list	ap;
 
 	va_start(ap, str);
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '%')
-		{
-			i ++;
-		}
-		else
-			write(1, &str[i], 1);
-		i ++;
-	}
+	parse_string(str, &ap);
 	va_end(ap);
 	return (0);
 }
