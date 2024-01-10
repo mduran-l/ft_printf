@@ -6,31 +6,32 @@
 /*   By: mduran-l <mduran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 09:54:35 by mduran-l          #+#    #+#             */
-/*   Updated: 2024/01/10 09:59:24 by mduran-l         ###   ########.fr       */
+/*   Updated: 2024/01/10 13:16:32 by mduran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-static void	parse_string(const char *str, va_list *ap)
+static int	parse_char(va_list *ap, char c)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < ft_strlen(str))
-	{
-		if (str[i] == '%')
-		{
-			if (str[i + 1] == '%')
-				ft_putchar_fd('%', 1);
-			if (str[i + 1] == 'c')
-				ft_putchar_fd(va_arg(*ap, int), 1);
-			if (str[i + 1] == 's')
-				ft_putstr_fd(va_arg(*ap, char *), 1);
-			if (str[i + 1] == 'i')
-				ft_putnbr_fd(va_arg(*ap, int), 1);
-		}
-		i ++;
-	}
+	if (c == '%')
+		return (ft_putchar('%'));
+	if (c == 'c')
+		return (ft_putchar(va_arg(*ap, int)));
+	if (c == 'd')
+		return (ft_putnbr(va_arg(*ap, long), 10, 0));
+	if (c == 'i')
+		return (ft_putnbr(va_arg(*ap, long), 10, 0));
+	if (c == 's')
+		return (ft_putstr(va_arg(*ap, char *)));
+	if (c == 'p')
+		return (ft_putpointer(va_arg(*ap, void *)));
+	if (c == 'u')
+		return (ft_putnbr(va_arg(*ap, long), 10, 0));
+	if (c == 'x')
+		return (ft_putnbr(va_arg(*ap, long), 16, 0));
+	if (c == 'X')
+		return (ft_putnbr(va_arg(*ap, long), 16, 1));
+	return (0);
 }
 
 /*
@@ -52,7 +53,8 @@ wing extensions:
 The format string is reused as often as necessary to satisfy the arguments.
 Any extra format specifications are evaluated with zero or the null string.
 
-The printf utility exits 0 on success, and >0 if an error occurs.
+The return value of printf() is the number of characters printed, or EOF to
+indicate that an error occurred.
 ===
 Tienes que implementar las siguientes conversiones:
 - %c Imprime un solo carácter.
@@ -73,9 +75,23 @@ Tienes que implementar las siguientes conversiones:
 int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
+	int		rt;
+	int		i;
 
 	va_start(ap, str);
-	parse_string(str, &ap);
+	i = 0;
+	rt = 0;
+	while (str[i])
+	{
+		if (str[i] == '%')
+		{
+			rt += parse_char(&ap, str[i + 1]);
+			i ++;
+		}
+		else
+			rt += ft_putchar(str[i]);
+		i ++;
+	}
 	va_end(ap);
-	return (0);
+	return (rt);
 }

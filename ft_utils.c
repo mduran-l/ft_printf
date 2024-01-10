@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mduran-l <mduran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 09:56:53 by mduran-l          #+#    #+#             */
-/*   Updated: 2024/01/10 13:18:34 by mduran-l         ###   ########.fr       */
+/*   Created: 2024/01/10 10:12:16 by mduran-l          #+#    #+#             */
+/*   Updated: 2024/01/10 11:54:20 by mduran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
+#include "ft_printf.h"
 
-size_t		ft_strlen(const char *str);
-int			ft_putchar(char c);
-int			ft_putstr(char *str);
-int			ft_putnbr(long n, int base, int m);
-int			ft_putpointer(void *p);
-int			ft_printf(const char *str, ...);
-#endif
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i ++])
+		i ++;
+	return (i);
+}
