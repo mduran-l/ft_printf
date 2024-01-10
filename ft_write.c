@@ -6,7 +6,7 @@
 /*   By: mduran-l <mduran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 10:07:49 by mduran-l          #+#    #+#             */
-/*   Updated: 2024/01/10 13:27:05 by mduran-l         ###   ########.fr       */
+/*   Updated: 2024/01/10 14:50:22 by mduran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -60,11 +60,6 @@ int	ft_putnbr(long n, int base, int up)
 
 int	ft_putpointer(void *p)
 {
-	long	n;
-
-	n = (long)p;
-	if (n < 0)
-		n = -n;
 	write(1, "0x", 2);
-	return (ft_putnbr(n, 16, 0) + 2);
+	return (ft_putnbr((long)p, 16, 0) + 2);
 }
