@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_write.c                                         :+:      :+:    :+:   */
+/*   ft_writestr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mduran-l <mduran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 10:07:49 by mduran-l          #+#    #+#             */
-/*   Updated: 2024/01/10 14:50:22 by mduran-l         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:21:54 by mduran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -30,36 +30,4 @@ int	ft_putstr(char *str)
 		i ++;
 	}
 	return (i);
-}
-
-int	ft_putnbr(long n, int base, int up)
-{
-	static int	r;
-	char		*basestr;
-	char		*baseup;
-
-	r = 0;
-	basestr = "0123456789abcdef";
-	baseup = "0123456789ABCDEF";
-	if (up)
-		basestr = baseup;
-	if (n < 0)
-	{
-		r += ft_putchar('-');
-		ft_putnbr(-n, base, up);
-	}
-	else if (n < base)
-		r += ft_putchar(basestr[n % base]);
-	else
-	{
-		ft_putnbr(n / base, base, up);
-		r += ft_putchar(basestr[n % base]);
-	}
-	return (r);
-}
-
-int	ft_putpointer(void *p)
-{
-	write(1, "0x", 2);
-	return (ft_putnbr((long)p, 16, 0) + 2);
 }

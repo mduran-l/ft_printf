@@ -6,7 +6,7 @@
 /*   By: mduran-l <mduran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 09:54:35 by mduran-l          #+#    #+#             */
-/*   Updated: 2024/01/10 14:48:03 by mduran-l         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:55:47 by mduran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -18,19 +18,19 @@ static int	parse_char(va_list *ap, char c)
 	if (c == 'c')
 		return (ft_putchar(va_arg(*ap, int)));
 	if (c == 'd')
-		return (ft_putnbr(va_arg(*ap, long), 10, 0));
+		return (ft_putnbr(va_arg(*ap, int), 10));
 	if (c == 'i')
-		return (ft_putnbr(va_arg(*ap, long), 10, 0));
+		return (ft_putnbr(va_arg(*ap, int), 10));
 	if (c == 's')
 		return (ft_putstr(va_arg(*ap, char *)));
 	if (c == 'p')
-		return (ft_putpointer(va_arg(*ap, void *)));
+		return (ft_putaddr(va_arg(*ap, unsigned long long)));
 	if (c == 'u')
-		return (ft_putnbr(va_arg(*ap, long), 10, 0));
+		return (ft_putnbr(va_arg(*ap, unsigned int), 10));
 	if (c == 'x')
-		return (ft_putnbr(va_arg(*ap, long), 16, 0));
+		return (ft_puthex(va_arg(*ap, long long), "0123456789abcdef"));
 	if (c == 'X')
-		return (ft_putnbr(va_arg(*ap, long), 16, 1));
+		return (ft_puthex(va_arg(*ap, long long), "0123456789ABCDEF"));
 	return (0);
 }
 
@@ -78,6 +78,8 @@ int	ft_printf(const char *str, ...)
 	int		rt;
 	int		i;
 
+	if (write(1, "", 0) < 0)
+		return (-1);
 	va_start(ap, str);
 	i = 0;
 	rt = 0;

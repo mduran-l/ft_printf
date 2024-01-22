@@ -6,7 +6,7 @@
 #    By: mduran-l <mduran-l@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 12:36:32 by mduran-l          #+#    #+#              #
-#    Updated: 2024/01/10 10:38:24 by mduran-l         ###   ########.fr        #
+#    Updated: 2024/01/22 12:22:21 by mduran-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = libftprintf.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 HDR = ft_printf.h
-SRCS = ft_utils.c ft_write.c ft_printf.c
+SRCS = ft_utils.c ft_writestr.c ft_writenbr.c ft_writehex.c ft_printf.c
 # SRCS_BONUS = 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)

@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_writenbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mduran-l <mduran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 09:56:53 by mduran-l          #+#    #+#             */
-/*   Updated: 2024/01/22 12:57:48 by mduran-l         ###   ########.fr       */
+/*   Created: 2024/01/10 10:07:49 by mduran-l          #+#    #+#             */
+/*   Updated: 2024/01/22 12:21:37 by mduran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
-# include <limits.h>
+#include "ft_printf.h"
 
-size_t		ft_strlen(const char *str);
-int			ft_putchar(char c);
-int			ft_putstr(char *str);
-int			ft_putnbr(long n, int base);
-int			ft_puthex(long long n, const char *basestr);
-int			ft_putaddr(unsigned long long p);
-int			ft_printf(const char *str, ...);
-#endif
+int	ft_putnbr(long n, int base)
+{
+	static int	r;
+	char		*basestr;
+
+	r = 0;
+	basestr = "0123456789";
+	if (n < 0)
+	{
+		ft_putchar('-');
+		return (ft_putnbr(-n, base) + 1);
+	}
+	else if (n < base)
+		r += ft_putchar(basestr[n % base]);
+	else
+	{
+		ft_putnbr(n / base, base);
+		r += ft_putchar(basestr[n % base]);
+	}
+	return (r);
+}
