@@ -6,22 +6,17 @@
 /*   By: mduran-l <mduran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 10:07:49 by mduran-l          #+#    #+#             */
-/*   Updated: 2024/01/22 12:58:33 by mduran-l         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:08:12 by mduran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-int	ft_puthex(long long n, const char *basestr)
+int	ft_puthex(unsigned int n, const char *basestr)
 {
 	static int	r;
 
 	r = 0;
-	if (n < 0)
-	{
-		ft_putchar('-');
-		return (ft_puthex(-n, basestr) + 1);
-	}
-	else if (n < 16)
+	if (n < 16)
 		r += ft_putchar(basestr[n % 16]);
 	else
 	{

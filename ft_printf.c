@@ -6,7 +6,7 @@
 /*   By: mduran-l <mduran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 09:54:35 by mduran-l          #+#    #+#             */
-/*   Updated: 2024/01/22 12:55:47 by mduran-l         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:06:14 by mduran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -28,9 +28,9 @@ static int	parse_char(va_list *ap, char c)
 	if (c == 'u')
 		return (ft_putnbr(va_arg(*ap, unsigned int), 10));
 	if (c == 'x')
-		return (ft_puthex(va_arg(*ap, long long), "0123456789abcdef"));
+		return (ft_puthex(va_arg(*ap, unsigned int), "0123456789abcdef"));
 	if (c == 'X')
-		return (ft_puthex(va_arg(*ap, long long), "0123456789ABCDEF"));
+		return (ft_puthex(va_arg(*ap, unsigned int), "0123456789ABCDEF"));
 	return (0);
 }
 
