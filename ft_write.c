@@ -42,6 +42,7 @@ int	ft_putnbr(long n, int base)
 	if (n < 0)
 	{
 		ft_putchar('-');
+		
 		return (ft_putnbr(-n, base) + 1);
 	}
 	else if (n < base)
